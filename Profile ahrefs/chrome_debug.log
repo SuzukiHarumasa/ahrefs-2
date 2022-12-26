@@ -1,0 +1,4 @@
+[75305:259:1226/203653.549138:ERROR:chrome_browser_main.cc(1079)] The use of Rosetta to run the x64 version of Chromium on Arm is neither tested nor maintained, and unexpected behavior will likely result. Please check that all tools that spawn Chromium are Arm-native.
+[75305:259:1226/203704.075569:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://app.ahrefs.com/user/login (0)
+[75305:259:1226/203717.321784:INFO:CONSOLE(2734)] "Uncaught SyntaxError: Private field '#REGION_TRIGGER' must be declared in an enclosing class", source: https://app.ahrefs.com/positions-explorer/top-subfolders/subdomains/jp/all/all/all/all/all/all/all/1/traffic_desc?target=hoken.kakaku.com%2F (2734)
+[75305:259:1226/203722.665358:WARNING:pref_notifier_impl.cc(41)] Pref observer for media_router.cast_allow_all_ips found at shutdown.
