@@ -8,6 +8,9 @@ from urllib.parse import urlparse
 USERNAME = "media_general@joint.works"
 PASSWORD = "Jointinc"
 
+DRIVER_PATH = '/Users/hoge/Documents/Project/Python/chromedriver'
+
+
 
 class AhrefsModel():
 
@@ -21,7 +24,8 @@ class AhrefsModel():
         # options.add_argument("-no-sandbox")
         profile_path = './Profile ahrefs'
         options.add_argument('--user-data-dir=' + profile_path)
-        driver = webdriver.Chrome(options=options)
+        
+        driver = webdriver.Chrome(executable_path=DRIVER_PATH,options=options)
 
         return driver
 
