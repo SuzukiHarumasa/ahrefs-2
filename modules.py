@@ -2,14 +2,13 @@ from selenium import webdriver
 from time import sleep
 import time
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
 import pandas as pd
 from urllib.parse import urlparse
+from webdriver_manager.chrome import ChromeDriverManager
 
 USERNAME = "media_general@joint.works"
 PASSWORD = "Jointinc"
 
-DRIVER_PATH = './chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_armhf.deb'
 
 class AhrefsModel():
 
@@ -18,15 +17,14 @@ class AhrefsModel():
         self.password = PASSWORD
 
     def mk_driver(self):
-        # options = webdriver.chrome.options.Options()
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("-headless")
-        chrome_options.add_argument("-no-sandbox")
+        options = webdriver.chrome.options.Options()
+        # chrome_options = webdriver.ChromeOptions()
+        options.add_argument("-headless")
+        options.add_argument("-no-sandbox")
         profile_path = './Profile ahrefs'
-        chrome_options.add_argument('--user-data-dir=' + profile_path)
+        options.add_argument('--user-data-dir=' + profile_path)
 
-        service = Service(executable_path=DRIVER_PATH)
-        driver = webdriver.Chrome(service=service, options=chrome_options)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         
         # driver = webdriver.Chrome(DRIVER_PATH,options=options)
 
