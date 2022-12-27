@@ -2,6 +2,7 @@ from selenium import webdriver
 from time import sleep
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 import pandas as pd
 from urllib.parse import urlparse
 
@@ -17,13 +18,17 @@ class AhrefsModel():
         self.password = PASSWORD
 
     def mk_driver(self):
-        options = webdriver.chrome.options.Options()
-        # options.add_argument("-headless")
-        # options.add_argument("-no-sandbox")
+        # options = webdriver.chrome.options.Options()
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("-headless")
+        chrome_options.add_argument("-no-sandbox")
         profile_path = './Profile ahrefs'
-        options.add_argument('--user-data-dir=' + profile_path)
+        chrome_options.add_argument('--user-data-dir=' + profile_path)
+
+        service = Service(executable_path=DRIVER_PATH)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
         
-        driver = webdriver.Chrome(DRIVER_PATH,options=options)
+        # driver = webdriver.Chrome(DRIVER_PATH,options=options)
 
         return driver
 
