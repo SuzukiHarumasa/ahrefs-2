@@ -10,8 +10,6 @@ PASSWORD = "Jointinc"
 
 DRIVER_PATH = './chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_armhf.deb'
 
-
-
 class AhrefsModel():
 
     def __init__(self,USERNAME,PASSWORD):
@@ -25,7 +23,7 @@ class AhrefsModel():
         profile_path = './Profile ahrefs'
         options.add_argument('--user-data-dir=' + profile_path)
         
-        driver = webdriver.Chrome(executable_path=DRIVER_PATH,options=options)
+        driver = webdriver.Chrome(DRIVER_PATH,options=options)
 
         return driver
 
