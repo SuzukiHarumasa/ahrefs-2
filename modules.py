@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 USERNAME = "media_general@joint.works"
 PASSWORD = "Jointinc"
 
-DRIVER_PATH = './chromedriver'
+DRIVER_PATH = './chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_armhf.deb'
 
 
 
