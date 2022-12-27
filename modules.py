@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 USERNAME = "media_general@joint.works"
 PASSWORD = "Jointinc"
 
-DRIVER_PATH = '/Users/hoge/Documents/Project/Python/chromedriver'
+DRIVER_PATH = './chromedriver'
 
 
 
