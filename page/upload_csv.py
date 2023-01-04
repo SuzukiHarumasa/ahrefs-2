@@ -23,8 +23,6 @@ def upload_csv():
     USERNAME = "media_general@joint.works"
     PASSWORD = "Jointinc"
 
-    am = AhrefsModel(USERNAME, PASSWORD)
-
     if data:
         second_image = Image.open('./img/harumasamama mogumogu.png')
 
@@ -32,10 +30,8 @@ def upload_csv():
         data = pd.read_csv(data)
         
         am = AhrefsModel(USERNAME,PASSWORD)
-        driver = am.mk_driver()
 
-        am.login_ahrefs(driver)
-        df = am.get_page_worth(driver, data)
+        df = am.get_page_worth(data)
         
         st.success('Done!!!', icon="✅")
         df.to_csv('./output/output.csv',

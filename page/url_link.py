@@ -31,10 +31,8 @@ def url_link():
         second_image = Image.open('./img/harumasamama mogumogu.png')
         
         am = AhrefsModel(USERNAME,PASSWORD)
-        driver = am.mk_driver()
-
-        am.login_ahrefs(driver)
-        df = am.get_page_worth_only_one(driver, url)
+        
+        df = am.get_page_worth_only_one(url)
         
         st.success('Done!!!', icon="✅")
         df.to_csv('./output/output.csv',
