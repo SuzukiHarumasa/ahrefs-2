@@ -117,7 +117,10 @@ class AhrefsModel():
 
         driver.quit()
 
-    def get_page_worth_only_one(self, driver, url):
+    def get_page_worth_only_one(self, url):
+
+        driver = self.mk_driver()
+        self.login_ahrefs(driver)
 
         df = pd.DataFrame()
 
