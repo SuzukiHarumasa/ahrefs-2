@@ -105,12 +105,12 @@ class AhrefsModel():
             df_tmp.columns = ['#', 'トラフィック', 'トラフィック.1', '価値', 'キーワード', 'ページ', 'パス',
                               'トップキーワード', '検索ボリューム', '順位', '順位..1']
 
-            df_tmp = df_tmp[['トラフィック', '価値', 'キーワード']]
+            df_tmp = df_tmp[['トラフィック', '価値', 'キーワード', 'ページ']]
 
             ahrefs_url = driver.current_url
 
             df_tmp.insert(0, 'ドメイン', domain)
-            df_tmp.insert(4, 'ahrefs上位ページ取得URL', ahrefs_url)
+            df_tmp.insert(5, 'ahrefs上位ページ取得URL', ahrefs_url)
 
             df = pd.concat([df, df_tmp], join='outer')
             print(f"{domain}完了")
@@ -152,12 +152,68 @@ class AhrefsModel():
         df_tmp.columns = ['#', 'トラフィック', 'トラフィック.1', '価値', 'キーワード', 'ページ', 'パス',
                           'トップキーワード', '検索ボリューム', '順位', '順位..1']
 
-        df_tmp = df_tmp[['トラフィック', '価値', 'キーワード']]
+        df_tmp = df_tmp[['トラフィック', '価値', 'キーワード', 'ページ']]
 
         ahrefs_url = driver.current_url
 
         df_tmp.insert(0, 'ドメイン', domain)
-        df_tmp.insert(4, 'ahrefs上位ページ取得URL', ahrefs_url)
+        df_tmp.insert(5, 'ahrefs上位ページ取得URL', ahrefs_url)
 
         df = pd.concat([df, df_tmp], join='outer')
         print(f"{domain}完了")
+
+    def get_page_worth_2(self, data):
+        driver = self.mk_driver()
+        self.login_ahrefs(driver)
+        df = pd.DataFrame()
+        for i, domain in enumerate(data['ドメイン'].to_list()):
+            if i == 0:
+                input_place = driver.find_element(
+                    By.XPATH, '//*[@id="root"]/div/div[1]/div[1]/div/div[1]/div[2]/div/div/div/input')
+                input_place.send_keys(domain)
+
+                serch_button = driver.find_element(
+                    By.XPATH, '//*[@id="root"]/div/div[1]/div[1]/div/div[1]/button')
+                serch_button.click()
+                sleep(7)
+
+                top_subfolders = driver.find_element(
+                    By.XPATH, '//*[@id="root"]/div/div[2]/div/div/div/div[3]/div[2]/div[3]/a')
+                top_subfolders.click()
+                sleep(10)
+
+            else:
+                delete_button = driver.find_element(
+                    By.XPATH, '//*[@id="clear_se_pe_target"]')
+                delete_button.click()
+
+                input_place_sec = driver.find_element(
+                    By.XPATH, '//*[@id="se_pe_target"]')
+                input_place_sec.send_keys(domain)
+
+                serch_button_sec = driver.find_element(
+                    By.XPATH, '//*[@id="se_pe_start_analysing"]')
+                serch_button_sec.click()
+                sleep(10)
+
+            df_tmp = driver.find_element(
+                By.XPATH, '//*[@id="main_se_data_table"]')
+
+            html = df_tmp.get_attribute('outerHTML')
+            df_tmp = pd.read_html(html)
+
+            df_tmp = df_tmp[0].head(1)
+            df_tmp.columns = ['#', 'トラフィック', 'トラフィック.1', '価値', 'キーワード', 'ページ', 'パス',
+                              'トップキーワード', '検索ボリューム', '順位', '順位..1']
+
+            df_tmp = df_tmp[['トラフィック', '価値', 'キーワード', 'ページ',]]
+
+            ahrefs_url = driver.current_url
+
+            df_tmp.insert(0, 'ドメイン', domain)
+            df_tmp.insert(5, 'ahrefs上位ページ取得URL', ahrefs_url)
+
+            df = pd.concat([df, df_tmp], join='outer')
+            print(f"{domain}完了")
+        driver.quit()
+        return df

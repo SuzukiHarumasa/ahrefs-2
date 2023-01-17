@@ -11,31 +11,33 @@ from PIL import Image
 
 IMG_PATH = './tmp_dir'
 
+
 @st.cache
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode('utf-8')
 
+
 def upload_csv():
 
     data = st.file_uploader("ファイルアップロード", type='csv')
 
-    USERNAME = "media_general@joint.works"
-    PASSWORD = "Jointinc"
+    USERNAME = "shotaro.yamazaki@flapnext.com"
+    PASSWORD = "zakizaki3939"
 
     if data:
         second_image = Image.open('./img/harumasamama mogumogu.png')
 
-        st.image(second_image,width=300)
-        data = pd.read_csv(data)
-        
-        am = AhrefsModel(USERNAME,PASSWORD)
+        st.image(second_image, width=300)
+        data = pd.read_csv(data, encoding="Shift-JIS")
 
-        df = am.get_page_worth(data)
-        
+        am = AhrefsModel(USERNAME, PASSWORD)
+
+        df = am.get_page_worth_2(data)
+
         st.success('Done!!!', icon="✅")
         df.to_csv('./output/output.csv',
-                index=False)
+                  index=False)
 
         st.dataframe(df)
         df = convert_df(df)
@@ -48,4 +50,4 @@ def upload_csv():
 
         if button:
             third_image = Image.open('./img/harumake6.png')
-            st.image(third_image,width=300)
+            st.image(third_image, width=300)
