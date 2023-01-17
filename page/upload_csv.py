@@ -22,32 +22,33 @@ def upload_csv():
 
     data = st.file_uploader("ファイルアップロード", type='csv')
 
-    USERNAME = "shotaro.yamazaki@flapnext.com"
-    PASSWORD = "zakizaki3939"
+    USERNAME = st.text_input('メールアドレスを入力', placeholder='example.com')
+    PASSWORD = st.text_input('パスワードを入力', placeholder='01234567')
 
-    if data:
-        second_image = Image.open('./img/harumasamama mogumogu.png')
+    if USERNAME & PASSWORD:
+        if data:
+            second_image = Image.open('./img/harumasamama mogumogu.png')
 
-        st.image(second_image, width=300)
-        data = pd.read_csv(data, encoding="Shift-JIS")
+            st.image(second_image, width=300)
+            data = pd.read_csv(data, encoding="Shift-JIS")
 
-        am = AhrefsModel(USERNAME, PASSWORD)
+            am = AhrefsModel(USERNAME, PASSWORD)
 
-        df = am.get_page_worth_2(data)
+            df = am.get_page_worth_2(data)
 
-        st.success('Done!!!', icon="✅")
-        df.to_csv('./output/output.csv',
-                  index=False)
+            st.success('Done!!!', icon="✅")
+            df.to_csv('./output/output.csv',
+                      index=False)
 
-        st.dataframe(df)
-        df = convert_df(df)
-        button = st.download_button(
-            label="Download",
-            data=df,
-            file_name='output.csv',
-            mime='text/csv',
-        )
+            st.dataframe(df)
+            df = convert_df(df)
+            button = st.download_button(
+                label="Download",
+                data=df,
+                file_name='output.csv',
+                mime='text/csv',
+            )
 
-        if button:
-            third_image = Image.open('./img/harumake6.png')
-            st.image(third_image, width=300)
+            if button:
+                third_image = Image.open('./img/harumake6.png')
+                st.image(third_image, width=300)

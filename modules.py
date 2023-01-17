@@ -8,9 +8,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 import shutil
 import os
 
-USERNAME = "media_general@joint.works"
-PASSWORD = "Jointinc"
-
 
 class AhrefsModel():
 
