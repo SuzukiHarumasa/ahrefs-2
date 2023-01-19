@@ -18,7 +18,7 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 
-def url_link():
+def url_link(USERNAME, PASSWORD):
     st.write("URLを入力！")
 
     url = st.text_input('URLを入力', placeholder='example.com')
