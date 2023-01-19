@@ -22,15 +22,17 @@ def upload_csv():
 
     data = st.file_uploader("ファイルアップロード", type='csv')
 
-    USERNAME = st.text_input('メールアドレスを入力', placeholder='example.com')
-    PASSWORD = st.text_input('パスワードを入力', placeholder='01234567')
+    USERNAME = st.text_input(
+        'メールアドレスを入力', key=str, placeholder='example.com')
+    PASSWORD = st.text_input(
+        'パスワードを入力', key=int,  placeholder='01234567')
 
-    if USERNAME & PASSWORD:
+    if USERNAME and PASSWORD:
         if data:
             second_image = Image.open('./img/harumasamama mogumogu.png')
 
             st.image(second_image, width=300)
-            data = pd.read_csv(data, encoding="Shift-JIS")
+            data = pd.read_csv(data, encoding="utf-8")
 
             am = AhrefsModel(USERNAME, PASSWORD)
 

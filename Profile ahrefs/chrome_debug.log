@@ -1,5 +1,0 @@
-[56994:259:0105/202756.374450:ERROR:chrome_browser_main.cc(1079)] The use of Rosetta to run the x64 version of Chromium on Arm is neither tested nor maintained, and unexpected behavior will likely result. Please check that all tools that spawn Chromium are Arm-native.
-[56994:259:0105/202806.899759:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://app.ahrefs.com/user/login (0)
-[57010:21251:0105/202826.966672:WARNING:spdy_session.cc(3487)] Received HEADERS for invalid stream 1
-[56994:259:0105/202838.864173:INFO:CONSOLE(2735)] "Uncaught SyntaxError: Private field '#REGION_TRIGGER' must be declared in an enclosing class", source: https://app.ahrefs.com/positions-explorer/top-subfolders/subdomains/all/all/all/all/all/all/all/all/1/traffic_desc?target=www.smauto.co.jp%2F (2735)
-[56994:259:0105/210622.684668:WARNING:pref_notifier_impl.cc(41)] Pref observer for media_router.cast_allow_all_ips found at shutdown.

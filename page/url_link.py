@@ -11,6 +11,7 @@ from PIL import Image
 
 IMG_PATH = './tmp_dir'
 
+
 @st.cache
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
@@ -22,31 +23,35 @@ def url_link():
 
     url = st.text_input('URLを入力', placeholder='example.com')
 
-    USERNAME = "media_general@joint.works"
-    PASSWORD = "Jointinc"
+    USERNAME = st.text_input(
+        'メールアドレスを入力', key=str, placeholder='example.com')
+    PASSWORD = st.text_input(
+        'パスワードを入力', key=int,  placeholder='01234567')
 
-    am = AhrefsModel(USERNAME, PASSWORD)
+    if USERNAME and PASSWORD:
 
-    if url:
-        second_image = Image.open('./img/harumasamama mogumogu.png')
-        
-        am = AhrefsModel(USERNAME,PASSWORD)
-        
-        df = am.get_page_worth_only_one(url)
-        
-        st.success('Done!!!', icon="✅")
-        df.to_csv('./output/output.csv',
-                index=False)
+        am = AhrefsModel(USERNAME, PASSWORD)
 
-        st.dataframe(df)
-        df = convert_df(df)
-        button = st.download_button(
-            label="Download",
-            data=df,
-            file_name='output.csv',
-            mime='text/csv',
-        )
+        if url:
+            second_image = Image.open('./img/harumasamama mogumogu.png')
 
-        if button:
-            third_image = Image.open('./img/harumake6.png')
-            st.image(third_image,width=300)
+            if USERNAME and PASSWORD:
+
+                df = am.get_page_worth_only_one(url)
+
+                st.success('Done!!!', icon="✅")
+                df.to_csv('./output/output.csv',
+                          index=False)
+
+                st.dataframe(df)
+                df = convert_df(df)
+                button = st.download_button(
+                    label="Download",
+                    data=df,
+                    file_name='output.csv',
+                    mime='text/csv',
+                )
+
+                if button:
+                    third_image = Image.open('./img/harumake6.png')
+                    st.image(third_image, width=300)
